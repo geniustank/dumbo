@@ -1,3 +1,3 @@
-import {} from "database"
+import {} from "database";
 
-console.log("Hello")
+console.log("Hello");
