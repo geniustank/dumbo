@@ -13,6 +13,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "graphql": "^16.7.1",
+    "database": "workspace:*",
     "type-graphql": "^1.1.1",
     "typescript": "^5.1.6"
   },
