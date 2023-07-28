@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-
+import { handleCallback } from "../helpers/handleCallback";
 
 const googleCallback: Router = Router();
 
@@ -20,8 +20,19 @@ googleCallback.get(
   async function (req, res) {
     const rawUser = req.user as any;
     console.log(rawUser);
-   
+    handleCallback(
+      res,
+      rawUser.emails[0].value,
+      rawUser.id,
+      rawUser.displayName,
+      ""
+    );
   }
 );
+
+googleCallback.get("/auth/google/success", (_, res) => {
+  res.send("Hello");
+  console.log("FINISHED");
+});
 
 export { googleCallback };

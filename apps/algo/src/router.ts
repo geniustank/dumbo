@@ -8,7 +8,7 @@ import { googleCallback } from "./callback/googleAuth";
 const router: Router = Router();
 initGoogle();
 router.use(parser.json());
-router.use(googleCallback)
+router.use(googleCallback);
 router.use(
   session({
     secret: validatedEnv.SECRET,
