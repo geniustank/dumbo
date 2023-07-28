@@ -29,24 +29,13 @@ MISC
 NONE
 }
 
-enum Chain {
-  SOLANA
-  EVM
-}
-
-enum Role {
-  Controller
-  Admin
-  Assertion
-  Authentication
-}
 
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   avatar     String?
-  bio        String?
+  googleId        String?
   name       String?
   email      String  @unique
   company    Company?
