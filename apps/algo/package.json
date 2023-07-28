@@ -10,19 +10,22 @@
     "dev": "nodemon --exec ts-node src/index.ts"
   },
   "dependencies": {
+    "database": "workspace:*",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "graphql": "^16.7.1",
-    "database": "workspace:*",
     "type-graphql": "^1.1.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/node": "^20.4.5",
     "eslint": "^8.45.0",
-    "tsconfig": "workspace:*",
+    "eslint-config-custom": "workspace:*",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "tsconfig": "workspace:*"
   }
 }
