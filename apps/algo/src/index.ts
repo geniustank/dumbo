@@ -1,3 +1,8 @@
-import {} from "database";
+import { validatedEnv } from "./constants";
+import { app } from "./graphql";
+import {createStartupMenu} from "./menu"
+app.listen(Number(validatedEnv.PORT), () => {
+  createStartupMenu();
+});
 
-console.log("Hello");
+export default app;

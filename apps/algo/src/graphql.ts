@@ -13,6 +13,7 @@ import { buildTypeDefsAndResolvers } from "type-graphql";
 import { Company } from "./resolvers/compnay";
 import { validatedEnv } from "./constants";
 import router from "./router";
+import { LoggerMiddleware } from "./helpers";
 
 const app: Express = express();
 
@@ -42,6 +43,7 @@ const httpServer: any = http.createServer(app);
 async function setupServerGraphql() {
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     resolvers: [Company],
+    globalMiddlewares: [LoggerMiddleware],
     emitSchemaFile: true,
   });
 
