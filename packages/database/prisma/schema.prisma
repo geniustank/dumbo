@@ -52,7 +52,7 @@ model Company {
   index Int
   funds Funds
   shares Shares
-  Fluctuation StockFluctuation? 
+  fluctuation StockFluctuation? 
   Query Query[]
   user   User   @relation(fields: [userId], references: [id])
   userId String @db.ObjectId @unique
@@ -65,8 +65,8 @@ type Funds {
 }
 
 type Shares {
- rawValue Int
- value String
+ number Int
+ basePrice Int @default(100)
  allocatedAt DateTime @default(now())
 }
 
