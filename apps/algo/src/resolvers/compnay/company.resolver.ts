@@ -1,9 +1,14 @@
-import { Query, Resolver } from "type-graphql";
+import { Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
 export class Company {
   @Query(() => String)
-  async createCompany() {
+  async hello() {
     return "Hello";
+  }
+
+  @Mutation(() => )
+  async createCompany(){
+
   }
 }
