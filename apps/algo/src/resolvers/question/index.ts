@@ -1,1 +1,1 @@
-export * from "./question.resolver"
+export * from "./question.resolver";

@@ -1,5 +1,5 @@
 import { PromptTemplate } from "langchain/prompts";
-import {OpenAI} from "langchain/llms/openai"
+import { OpenAI } from "langchain/llms/openai";
 
 const QuestionGenPrompt = PromptTemplate.fromTemplate(`
 
@@ -21,10 +21,8 @@ also keep questions a lot harder.
 `);
 
 const llm = new OpenAI({
-    modelName: "gpt-3.5-turbo",
-  });
-
-
+  modelName: "gpt-3.5-turbo",
+});
 
 const AnswerCheckPrompt = PromptTemplate.fromTemplate(`
 You are a model intended for verifying answers kids gave about their projects,designed for a specific age group. The students will be presenting their answers based on their idea. Here is parameters
@@ -44,11 +42,6 @@ Marking Scheme:
 7-9: Good response - Your answer is mostly clear and accurate but could use some improvement.
 4-6: Fair response - Your answer has some clarity and accuracy issues and needs improvement.
 1-3: Poor response - Your answer lacks clarity, accuracy, and requires significant improvement.
-`)
+`);
 
-
-export {
-    llm,
-    QuestionGenPrompt,
-    AnswerCheckPrompt
-}
+export { llm, QuestionGenPrompt, AnswerCheckPrompt };

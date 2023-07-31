@@ -62,6 +62,8 @@ export class CompanyClass {
         userId: user.id,
       },
     });
+
+    console.log("oh");
     console.log(createdcompany);
     return {
       msg: "company created",
@@ -79,9 +81,7 @@ export class CompanyClass {
     };
   }
   @Query(() => Company)
-  async getCompany(
-    @Arg("email") email: string,
-  ) {
+  async getCompany(@Arg("email") email: string) {
     const user = await prisma.user.findUnique({
       where: {
         email,
@@ -121,5 +121,4 @@ export class CompanyClass {
       updatedAt: compnayVal.updatedAt,
     };
   }
-
 }

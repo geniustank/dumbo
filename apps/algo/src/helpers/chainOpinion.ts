@@ -1,3 +1,1 @@
-export async function manipulateOpinion() {
-    
-}
+export async function manipulateOpinion() {}

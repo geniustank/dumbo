@@ -3,7 +3,9 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-"""The company class"""
+"""
+The company class
+"""
 type Company {
   createdAt: String
   discription: String
@@ -27,17 +29,31 @@ type Funds {
 }
 
 type Mutation {
-  createCompany(discription: String!, email: String!, fund: String!, name: String!, primarySector: String!, secondarySector: String!): Company!
+  createCompany(
+    discription: String!
+    email: String!
+    fund: String!
+    name: String!
+    primarySector: String!
+    secondarySector: String!
+  ): Company!
 }
 
 type Query {
-  checkQuestion(answer: String!, group: String!, idea: String!, question: String!): String!
-  genQuestion(group: String!, idea: String!): String!
+  checkQuestion(
+    answer: String!
+    group: String!
+    idea: String!
+    question: String!
+  ): String!
+  genQuestion(email: String!, group: String!, idea: String!): String!
   getCompany(email: String!): Company!
   hello: String!
 }
 
-"""The user connection class"""
+"""
+The user connection class
+"""
 type Questions {
   accurasy: Float
   createdAt: String

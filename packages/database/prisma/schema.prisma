@@ -53,7 +53,7 @@ model Company {
   funds Funds
   shares Shares
   fluctuation StockFluctuation? 
-  Query Query[]
+  query question[]
   user   User   @relation(fields: [userId], references: [id])
   userId String @db.ObjectId @unique
 }
@@ -81,7 +81,7 @@ model StockFluctuation {
   companyId String @db.ObjectId @unique
 }
 
-model Query {
+model question {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   verifiedAt DateTime @updatedAt
