@@ -42,6 +42,8 @@ Marking Scheme:
 7-9: Good response - Your answer is mostly clear and accurate but could use some improvement.
 4-6: Fair response - Your answer has some clarity and accuracy issues and needs improvement.
 1-3: Poor response - Your answer lacks clarity, accuracy, and requires significant improvement.
+
+Kindly just return the score in format of a number, no need to give any suggestions or feedbacks, Thank you.
 `);
 
 export { llm, QuestionGenPrompt, AnswerCheckPrompt };

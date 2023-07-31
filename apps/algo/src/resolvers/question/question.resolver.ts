@@ -5,6 +5,7 @@ import {
   llm,
 } from "../../helpers/openai";
 import { prisma } from "../../lib";
+import { manipulateOpinion } from "../../helpers/chainOpinion";
 
 @Resolver()
 export class Question {
@@ -61,20 +62,59 @@ export class Question {
   async checkQuestion(
     @Arg("group") group: string,
     @Arg("idea") idea: string,
+    @Arg("email") email: string,
     @Arg("answer") answer: string,
-    @Arg("question") question: string
   ) {
-    console.log(group, idea, question, answer);
-    const query = await AnswerCheckPrompt.format({
+    const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+      if (!user) return "gay";
+  
+      const compnayVal = await prisma.company.findUnique({
+        where: {
+          userId: user.id,
+        },
+      });
+      if (!compnayVal) return "bhak madherchod";
+      console.log(compnayVal);
+
+      const query = await prisma.question.findMany({
+        where: {
+          companyId: compnayVal.id,
+        },
+      });
+    const isQuery = query.find((q) => q.isAnswered == false);
+    if (!isQuery) {
+      console.log(isQuery);
+      return "query not there create a query";
+    }
+    const prompt = await AnswerCheckPrompt.format({
       group: group,
       idea: idea,
-      question: question,
+      question: isQuery.question,
       answer: answer,
     });
-    console.log(query);
+    console.log(prompt);
 
-    const score = await llm.call(query);
+    const score = await llm.call(prompt);
     console.log(score);
+
+    const updatedQuestion = await prisma.question.update({
+        where: {
+            id: isQuery.id
+        },
+        data: {
+            accurasy: Number(score),
+            isAnswered: true
+        }
+    })
+    console.log(updatedQuestion)
     return "hi";
+  }
+  @Query(() => String)
+  async question() {
+   return "o"
   }
 }
