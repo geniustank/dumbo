@@ -10,7 +10,7 @@ import session from "express-session";
 import http from "http";
 import "reflect-metadata";
 import { buildTypeDefsAndResolvers } from "type-graphql";
-import { Company } from "./resolvers/compnay";
+import { CompanyClass } from "./resolvers/compnay";
 import { validatedEnv } from "./constants";
 import router from "./router";
 import { LoggerMiddleware } from "./helpers";
@@ -42,7 +42,7 @@ const httpServer: any = http.createServer(app);
 
 async function setupServerGraphql() {
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
-    resolvers: [Company],
+    resolvers: [CompanyClass],
     globalMiddlewares: [LoggerMiddleware],
     emitSchemaFile: true,
   });

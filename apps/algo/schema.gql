@@ -3,6 +3,62 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The company class
+"""
+type Company {
+  createdAt: String
+  discription: String
+  funds: Funds
+  id: String
+  index: Float
+  msg: String
+  name: String
+  primarySector: String
+  Query: [Questions!]
+  secondarySector: String
+  shares: Shares
+  status: Float
+  updatedAt: String
+}
+
+type Funds {
+  allocatedAt: String
+  rawValue: Float
+  value: String
+}
+
+type Mutation {
+  createCompany(
+    discription: String!
+    email: String!
+    fund: String!
+    name: String!
+    primarySector: String!
+    secondarySector: String!
+  ): Company!
+}
+
 type Query {
-  createCompany: String!
+  hello: String!
+}
+
+"""
+The user connection class
+"""
+type Questions {
+  accurasy: Float
+  createdAt: String
+  id: String
+  isAnswered: Boolean
+  msg: String
+  question: String
+  status: Float
+  verifiedAt: String
+}
+
+type Shares {
+  allocatedAt: String
+  basePrice: Float
+  number: Float
 }

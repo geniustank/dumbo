@@ -1,9 +1,10 @@
 import { Sector } from "database";
-import { Mutation, Query, Resolver, Arg} from "type-graphql";
+import { Mutation, Query, Resolver, Arg } from "type-graphql";
 import { prisma } from "../../lib";
+import { Company } from "./compnay.types";
 
 @Resolver()
-export class Company {
+export class CompanyClass {
   @Query(() => String)
   async hello() {
     return "Hello";
@@ -16,33 +17,34 @@ export class Company {
     @Arg("discription") discription: string,
     @Arg("primarySector") primarySector: Sector,
     @Arg("secondarySector") secondarySector: Sector,
-    @Arg("fund") fund: string,
-  ){
+    @Arg("fund") fund: string
+  ) {
     const user = await prisma.user.findUnique({
-      where:{
-        email
-      }
-    })
-    if(!user) return {
-      msg: "No user found",
-      status: 200
-    }
+      where: {
+        email,
+      },
+    });
+    if (!user)
+      return {
+        msg: "No user found",
+        status: 200,
+      };
 
     const compnayVal = await prisma.company.findUnique({
-      where:{
-        userId: user.id
-      }
-    })
- 
-    if(compnayVal) {
-     return {
-      msg: "company already made",
-      status: 200
-     }
+      where: {
+        userId: user.id,
+      },
+    });
+
+    if (compnayVal) {
+      return {
+        msg: "company already made",
+        status: 200,
+      };
     }
-    
-    const index = (await (prisma.company.findMany())).length + 1
-   
+
+    const index = (await prisma.company.findMany()).length + 1;
+
     const createdcompany = await prisma.company.create({
       data: {
         name,
@@ -52,18 +54,28 @@ export class Company {
         index,
         funds: {
           value: fund,
-          rawValue: Number(fund)
+          rawValue: Number(fund),
         },
         shares: {
-          number: Number(fund) / 100
+          number: Number(fund) / 100,
         },
-        userId: user.id
-      }
-    })
-    
-    console.log(createdcompany)
-    return {}
-
+        userId: user.id,
+      },
+    });
+    console.log(createdcompany);
+    return {
+      msg: "company created",
+      status: 200,
+      name: createdcompany.name,
+      discription: createdcompany.discription,
+      primarySector: createdcompany.primarySector,
+      secondarySector: createdcompany.secondarySector,
+      index: createdcompany.index,
+      id: createdcompany.id,
+      funds: createdcompany.funds,
+      shares: createdcompany.shares,
+      createdAt: createdcompany.createdAt,
+      updatedAt: createdcompany.updatedAt,
+    };
   }
-
 }

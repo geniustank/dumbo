@@ -5,8 +5,7 @@ export async function handleCallback(
   email: string,
   id: string,
   name: string,
-  avatar?: string,
-
+  avatar?: string
 ) {
   const user = await prisma.user.findUnique({
     where: {
