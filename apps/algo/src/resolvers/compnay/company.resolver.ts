@@ -78,4 +78,48 @@ export class CompanyClass {
       updatedAt: createdcompany.updatedAt,
     };
   }
+  @Query(() => Company)
+  async getCompany(
+    @Arg("email") email: string,
+  ) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    if (!user)
+      return {
+        msg: "No user found",
+        status: 200,
+      };
+
+    const compnayVal = await prisma.company.findUnique({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    if (!compnayVal) {
+      return {
+        msg: "No company found",
+        status: 200,
+      };
+    }
+
+    return {
+      msg: "company found",
+      status: 200,
+      name: compnayVal.name,
+      discription: compnayVal.discription,
+      primarySector: compnayVal.primarySector,
+      secondarySector: compnayVal.secondarySector,
+      index: compnayVal.index,
+      id: compnayVal.id,
+      funds: compnayVal.funds,
+      shares: compnayVal.shares,
+      createdAt: compnayVal.createdAt,
+      updatedAt: compnayVal.updatedAt,
+    };
+  }
+
 }

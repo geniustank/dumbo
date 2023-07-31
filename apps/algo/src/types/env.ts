@@ -8,6 +8,7 @@ const envSchema = z
     GOOGLE_ID: z.string(),
     GOOGLE_SECRET: z.string(),
     BASE_URL: z.string(),
+    OPENAI_API_KEY: z.string(),
   })
   .required();
 
