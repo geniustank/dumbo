@@ -13,28 +13,27 @@ export class Question {
   async genQuestion(
     @Arg("group") group: string,
     @Arg("email") email: string,
-    @Arg("idea") idea: string
   ) {
     const user = await prisma.user.findUnique({
       where: {
         email,
       },
     });
-    if (!user) return "gay";
+    if (!user) return "no user";
 
     const compnayVal = await prisma.company.findUnique({
       where: {
         userId: user.id,
       },
     });
-    if (!compnayVal) return "bhak madherchod";
+    if (!compnayVal) return "no company";
     console.log(compnayVal);
     const query = await prisma.question.findMany({
       where: {
         companyId: compnayVal.id,
       },
     });
-    if (!query) return "bhk";
+    if (!query) return "no query";
     console.log(query);
     const isQuery = query.find((q) => q.isAnswered == false);
     if (isQuery) {
@@ -43,7 +42,7 @@ export class Question {
     }
     const question = await QuestionGenPrompt.format({
       group: group,
-      idea: idea,
+      idea: compnayVal.discription,
     });
 
     const qnaquery = await llm.call(question);
@@ -61,7 +60,6 @@ export class Question {
   @Query(() => String)
   async checkQuestion(
     @Arg("group") group: string,
-    @Arg("idea") idea: string,
     @Arg("email") email: string,
     @Arg("answer") answer: string,
   ) {
@@ -70,7 +68,7 @@ export class Question {
           email,
         },
       });
-      if (!user) return "gay";
+      if (!user) return "no user";
   
       const compnayVal = await prisma.company.findUnique({
         where: {
@@ -92,7 +90,7 @@ export class Question {
     }
     const prompt = await AnswerCheckPrompt.format({
       group: group,
-      idea: idea,
+      idea: compnayVal.discription,
       question: isQuery.question,
       answer: answer,
     });

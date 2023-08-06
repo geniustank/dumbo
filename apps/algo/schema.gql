@@ -31,8 +31,8 @@ type Mutation {
 }
 
 type Query {
-  checkQuestion(answer: String!, email: String!, group: String!, idea: String!): String!
-  genQuestion(email: String!, group: String!, idea: String!): String!
+  checkQuestion(answer: String!, email: String!, group: String!): String!
+  genQuestion(email: String!, group: String!): String!
   getCompany(email: String!): Company!
   hello: String!
   question: String!
