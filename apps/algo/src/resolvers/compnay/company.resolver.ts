@@ -3,6 +3,7 @@ import { Mutation, Query, Resolver, Arg } from "type-graphql";
 import { prisma } from "../../lib";
 import { Company } from "./compnay.types";
 
+
 @Resolver()
 export class CompanyClass {
   @Query(() => String)

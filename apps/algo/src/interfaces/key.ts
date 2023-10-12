@@ -5,6 +5,6 @@ enum user {
 
 export interface ContextKey {
   user: user;
-  key: string;
+  key: string;  
   timestamp: string;
 }

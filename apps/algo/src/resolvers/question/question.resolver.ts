@@ -3,6 +3,7 @@ import {
   AnswerCheckPrompt,
   QuestionGenPrompt,
   llm,
+  questionlol,
 } from "../../helpers/openai";
 import { prisma } from "../../lib";
 import { manipulateOpinion } from "../../helpers/chainOpinion";
@@ -111,8 +112,25 @@ export class Question {
     console.log(updatedQuestion)
     return "hi";
   }
+
   @Query(() => String)
-  async question() {
-   return "o"
+  async useMindify(
+    @Arg("group") group: string,
+    @Arg("std") std: string,
+    @Arg("lang") lang: string,
+    @Arg("course") course: string,
+    @Arg("question") question: string,
+  ) {
+   const prompt = await questionlol.format({
+    group: group,
+    class: std,
+    lang: lang,
+    course: course,
+    question: question
+   })
+   console.log(prompt)
+   const reply = await llm.call(prompt);
+
+   return reply
   }
 }
