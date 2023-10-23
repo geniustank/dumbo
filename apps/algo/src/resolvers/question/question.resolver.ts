@@ -7,6 +7,7 @@ import {
 } from "../../helpers/openai";
 import { prisma } from "../../lib";
 import { manipulateOpinion } from "../../helpers/chainOpinion";
+import { execute } from "../../helpers/llm";
 
 @Resolver()
 export class Question {
@@ -114,7 +115,7 @@ export class Question {
   }
 
   @Query(() => String)
-  async useMindify(
+  async useRefAi(
     @Arg("group") group: string,
     @Arg("std") std: string,
     @Arg("lang") lang: string,
@@ -126,10 +127,22 @@ export class Question {
     class: std,
     lang: lang,
     course: course,
-    question: question
+    question: question+ ", answer in a way it connects to sports, through examples, visualise it for the user and make them understand well."
    })
    console.log(prompt)
    const reply = await llm.call(prompt);
+
+   return reply
+  }
+
+  @Query(() => String)
+  async samAltmanLLM(
+    @Arg("question") question: string,
+  ) {
+const reply =  await  execute({
+      question:"write blog on release of dalle 3",
+      isStreaming: false
+  })
 
    return reply
   }

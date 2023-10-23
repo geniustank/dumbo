@@ -35,7 +35,8 @@ type Query {
   genQuestion(email: String!, group: String!): String!
   getCompany(email: String!): Company!
   hello: String!
-  useMindify(course: String!, group: String!, lang: String!, question: String!, std: String!): String!
+  samAltmanLLM(question: String!): String!
+  useRefAi(course: String!, group: String!, lang: String!, question: String!, std: String!): String!
 }
 
 """The user connection class"""
